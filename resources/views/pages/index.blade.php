@@ -1,6 +1,5 @@
+<x-layout title="Home">
 
-@extends('Components.layout')
-
-@section('content')
-
-@endsection
+    
+</x-layout>
+  

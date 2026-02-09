@@ -43,7 +43,7 @@ class AuthController extends Controller
         if (Auth::attempt($validated)) {
             $request->session()->regenerate();
             
-            return redirect()->route('welcome');
+            return redirect()->route('pages.index');
         }
 
         return back()->withErrors([
