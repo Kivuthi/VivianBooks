@@ -43,6 +43,10 @@ class AuthController extends Controller
         if (Auth::attempt($validated)) {
             $request->session()->regenerate();
             
+            if (Auth::user()->is_admin) {
+                return redirect()->route('admin.dashboard');
+            }
+
             return redirect()->route('pages.index');
         }
 

@@ -25,6 +25,8 @@
             <p class="text-gray-600 mb-5">
                 the comfort of your home.
             </p>
+
+            <p class="mt-5 text-xl font-semibold font-serif">Open 24 Hours</p>
         </div>
 
         <div class="flex flex-col">
@@ -37,6 +39,7 @@
         <div class="flex flex-col">
             <h1 class="text-2xl mb-8 font-serif font-semibold">Social Media</h1>
             <a href="" class="text-gray-600 mb-2 hover:text-red-900">WhatsApp</a>
+            <a href="" class="text-gray-600 mb-2 hover:text-red-900">Facebook</a>
             <a href="" class="text-gray-600 mb-2 hover:text-red-900">Instagram</a>
             <a href="" class="text-gray-600 mb-2 hover:text-red-900">TikTok</a>
         </div>
@@ -44,11 +47,11 @@
         <div class="flex flex-col">
             <h1 class="text-2xl mb-8 font-serif font-semibold">Contact Us</h1>
             
-            <p class="text-gray-600 mb-2"> <i class="fa-regular fa-envelope mr-3" style="color: #8e4848;"></i> Email:vivi@gmail.com</p>
+            <p class="text-gray-600 mb-2"> <i class="fa-regular fa-envelope mr-3" style="color: #8e4848;"></i> viviveronica690@gmail.com</p>
             
-            <p class="text-gray-600 mb-2"> <i class="fa-solid fa-phone mr-3" style="color: #8e4848;"></i> Phone: +254 712 345 678</p>
+            <p class="text-gray-600 mb-2"> <i class="fa-solid fa-phone mr-3" style="color: #8e4848;"></i> Phone: +254 768 454 160</p>
             
-            <p class="text-gray-600 mb-2"> <i class="fa-solid fa-location-dot mr-3" style="color: #8e4848;"></i>123 Book Street, Nairobi, Kenya</p>
+            <p class="text-gray-600 mb-2"> <i class="fa-solid fa-location-dot mr-3" style="color: #8e4848;"></i>Tom Mboya St, Nairobi, Kenya</p>
         </div>
     </div>
 
