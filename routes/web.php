@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\BooksController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\pages\HomepageController;
@@ -21,6 +22,7 @@ Route::middleware('auth')->group(function () {
 //admin routes
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/admin/books', [BooksController::class, 'index'])->name('admin.books.index');
 });
 
 
