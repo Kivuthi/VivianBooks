@@ -24,7 +24,8 @@ return new class extends Migration
             $table->string('cover_image')->nullable();
             $table->string('category')->nullable();
             $table->string('status')->default('premium');
-            $table->decimal('price', 8, 2)->default(0.00);
+            $table->decimal('softCopyPrice', 8, 2)->default(0.00);
+            $table->decimal('hardCopyPrice', 8, 2)->default(0.00);
             $table->string('rating')->nullable();
             $table->timestamps();
         });

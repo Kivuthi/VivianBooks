@@ -3,12 +3,45 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Book;
 use Illuminate\Http\Request;
 
 class BooksController extends Controller
 {
     public function index()
     {
-        return view('admin.books.index');
+        $books = Book::latest()->get();
+        return view('admin.books.index',compact('books'));
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'publication_date' => 'nullable|date', 
+            'isbn' => 'nullable|string|max:20',
+            'cover_image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg,gif',
+            'language' => 'nullable|string|max:50',
+            'pages' => 'nullable|integer',
+            'format' => 'nullable|string|max:50',
+            'category' => 'nullable|string|max:100',
+            'status' => 'nullable|string|max:50',
+            'softCopyPrice' => 'nullable|numeric',
+            'hardCopyPrice' => 'nullable|numeric',
+            'rating' => 'nullable|numeric|min:0|max:5',
+            'overview' => 'nullable|string',
+
+        ]);
+
+        if ($request->hasFile('cover_image')) {
+            $path = $request->file('cover_image')->store('public/covers');
+            $validated['cover_image'] = basename($path);
+        }
+
+        Book::create($validated);
+
+        return redirect()->route('admin.books.index')->with('success', 'Book added successfully!');
     }
 }

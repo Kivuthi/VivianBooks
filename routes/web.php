@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/books', [BooksController::class, 'index'])->name('admin.books.index');
+    Route::post('/admin/books', [BooksController::class, 'store'])->name('admin.books.store');
 });
 
 

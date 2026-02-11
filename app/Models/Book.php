@@ -18,7 +18,8 @@ class Book extends Model
         'cover_image',
         'category',
         'status',
-        'price',
+        'softCopyPrice',
+        'hardCopyPrice',
         'rating'
     ];
 }

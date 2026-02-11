@@ -45,281 +45,102 @@
                     </tr>
                 </thead>
 
-                <tbody class="hover:bg-gray-100">
-                    <!-- Example Row -->
-                    <tr class="border-b">
-                        <td class="py-4 px-6 whitespace-nowrap">
-                            <div class="flex items-center gap-4">
-                                <img src="https://via.placeholder.com/50" alt="Book Cover" class="w-12 h-16 object-cover rounded">
-                                <div>
-                                    <p class="text-sm font-medium text-gray-900">The Great Gatsby</p>
-                                    <p class="text-xs text-gray-500">F. Scott Fitzgerald</p>
+                @foreach ($books as $book)
+                    
+                    <tbody class="hover:bg-gray-100">
+                        <!-- Example Row -->
+                        <tr class="border-b">
+                            <td class="py-4 px-6 whitespace-nowrap">
+                                <div class="flex items-center gap-4">
+                                    <img src="{{ $book->image }}" alt="{{ $book->title }}" class="w-12 h-16 object-cover rounded">
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">{{ $book->title }}</p>
+                                        <p class="text-xs text-gray-500">{{ $book->author }}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td class="py-4 px-6 whitespace-nowrap">History</td>
-                        <td class="py-4 px-6 whitespace-nowrap">
-                            <div>
-                                <p>S.Copy <span>KSH. 50</span></p>
-                                <p>H.Copy <span>KSH. 700</span> </p>
-                            </div>
-                        </td>
-                        <td class="py-4 px-6 whitespace-nowrap">Premium</td>
-                        <td class="py-4 px-6 whitespace-nowrap">100</td>
-                        <td class="relative inline-block py-4 px-6 whitespace-nowrap">
-                            <button
-                                type="button"
-                                class="actions-btn w-10 h-10 inline-flex items-center justify-center
-                                    rounded-lg border border-transparent
-                                    text-gray-500
-                                    hover:text-gray-800 hover:border-yellow-700 hover:bg-yellow-100
-                                    focus:outline-none focus:ring-2 focus:ring-yellow-600
-                                    transition"
-                            >
-                                <span class="text-xl leading-none">⋯</span>
-                            </button>
-
-                            <!-- Dropdown -->
-                            <div
-                                class="actions-menu hidden absolute right-0 mt-2 w-44
-                                    bg-white border border-gray-200
-                                    rounded-xl shadow-lg z-50"
-                            >
-                                <ul class="py-1 text-sm text-gray-700">
-
-                                    <li>
-                                        <a href="#"
-                                        class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100">
-                                            <i class="fa-regular fa-eye"></i>
-                                            View
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#"
-                                        class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100">
-                                            <i class="fa-regular fa-pen-to-square"></i>
-                                            Edit
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#"
-                                        class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100">
-                                            <i class="fa-solid fa-download"></i>
-                                            Download
-                                        </a>
-                                    </li>
-
-                                    <li><hr class="my-1 border-gray-200"></li>
-
-                                    <li>
-                                        <form method="POST" action="#">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button
-                                                type="submit"
-                                                class="w-full flex items-center gap-3 px-4 py-2
-                                                    text-red-700 hover:bg-red-50"
-                                                onclick="return confirm('Delete this item?')"
-                                            >
-                                                <i class="fa-regular fa-trash-can"></i>
-                                                Delete
-                                            </button>
-                                        </form>
-                                    </li>
-
-                                </ul>
-                            </div>
-
-                        </td>
-                    </tr>
-
-                </tbody>
-
-                <tbody class="hover:bg-gray-100">
-                    <!-- Example Row -->
-                    <tr class="border-b">
-                        <td class="py-4 px-6 whitespace-nowrap">
-                            <div class="flex items-center gap-4">
-                                <img src="https://via.placeholder.com/50" alt="Book Cover" class="w-12 h-16 object-cover rounded">
+                            </td>
+                            <td class="py-4 px-6 whitespace-nowrap">{{ $book->category }}</td>
+                            <td class="py-4 px-6 whitespace-nowrap">
                                 <div>
-                                    <p class="text-sm font-medium text-gray-900">The Great Gatsby</p>
-                                    <p class="text-xs text-gray-500">F. Scott Fitzgerald</p>
+                                    <p>S.Copy <span>{{ $book->softCopyPrice }}</span></p>
+                                    <p>H.Copy <span>{{ $book->hardCopyPrice }}</span> </p>
                                 </div>
-                            </div>
-                        </td>
-                        <td class="py-4 px-6 whitespace-nowrap">History</td>
-                        <td class="py-4 px-6 whitespace-nowrap">
-                            <div>
-                                <p>S.Copy <span>KSH. 50</span></p>
-                                <p>H.Copy <span>KSH. 700</span> </p>
-                            </div>
-                        </td>
-                        <td class="py-4 px-6 whitespace-nowrap">Premium</td>
-                        <td class="py-4 px-6 whitespace-nowrap">100</td>
-                        <td class="relative inline-block py-4 px-6 whitespace-nowrap">
-                            <button
-                                type="button"
-                                class="actions-btn w-10 h-10 inline-flex items-center justify-center
-                                    rounded-lg border border-transparent
-                                    text-gray-500
-                                    hover:text-gray-800 hover:border-yellow-700 hover:bg-yellow-100
-                                    focus:outline-none focus:ring-2 focus:ring-yellow-600
-                                    transition"
-                            >
-                                <span class="text-xl leading-none">⋯</span>
-                            </button>
+                            </td>
+                            <td class="py-4 px-6 whitespace-nowrap">{{ $book->status }}</td>
+                            <td class="py-4 px-6 whitespace-nowrap">{{  count($book->downloads) }}</td>
+                            <td class="relative inline-block py-4 px-6 whitespace-nowrap">
+                                <button
+                                    type="button"
+                                    class="actions-btn w-10 h-10 inline-flex items-center justify-center
+                                        rounded-lg border border-transparent
+                                        text-gray-500
+                                        hover:text-gray-800 hover:border-yellow-700 hover:bg-yellow-100
+                                        focus:outline-none focus:ring-2 focus:ring-yellow-600
+                                        transition"
+                                >
+                                    <span class="text-xl leading-none">⋯</span>
+                                </button>
 
-                            <!-- Dropdown -->
-                            <div
-                                class="actions-menu hidden absolute right-0 mt-2 w-44
-                                    bg-white border border-gray-200
-                                    rounded-xl shadow-lg z-50"
-                            >
-                                <ul class="py-1 text-sm text-gray-700">
+                                <!-- Dropdown -->
+                                <div
+                                    class="actions-menu hidden absolute right-0 mt-2 w-44
+                                        bg-white border border-gray-200
+                                        rounded-xl shadow-lg z-50"
+                                >
+                                    <ul class="py-1 text-sm text-gray-700">
 
-                                    <li>
-                                        <a href="#"
-                                        class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100">
-                                            <i class="fa-regular fa-eye"></i>
-                                            View
-                                        </a>
-                                    </li>
+                                        <li>
+                                            <a href="#"
+                                            class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100">
+                                                <i class="fa-regular fa-eye"></i>
+                                                View
+                                            </a>
+                                        </li>
 
-                                    <li>
-                                        <a href="#"
-                                        class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100">
-                                            <i class="fa-regular fa-pen-to-square"></i>
-                                            Edit
-                                        </a>
-                                    </li>
+                                        <li>
+                                            <a href="#"
+                                            class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100">
+                                                <i class="fa-regular fa-pen-to-square"></i>
+                                                Edit
+                                            </a>
+                                        </li>
 
-                                    <li>
-                                        <a href="#"
-                                        class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100">
-                                            <i class="fa-solid fa-download"></i>
-                                            Download
-                                        </a>
-                                    </li>
+                                        <li>
+                                            <a href="#"
+                                            class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100">
+                                                <i class="fa-solid fa-download"></i>
+                                                Download
+                                            </a>
+                                        </li>
 
-                                    <li><hr class="my-1 border-gray-200"></li>
+                                        <li><hr class="my-1 border-gray-200"></li>
 
-                                    <li>
-                                        <form method="POST" action="#">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button
-                                                type="submit"
-                                                class="w-full flex items-center gap-3 px-4 py-2
-                                                    text-red-700 hover:bg-red-50"
-                                                onclick="return confirm('Delete this item?')"
-                                            >
-                                                <i class="fa-regular fa-trash-can"></i>
-                                                Delete
-                                            </button>
-                                        </form>
-                                    </li>
+                                        <li>
+                                            <form method="POST" action="#">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button
+                                                    type="submit"
+                                                    class="w-full flex items-center gap-3 px-4 py-2
+                                                        text-red-700 hover:bg-red-50"
+                                                    onclick="return confirm('Delete this item?')"
+                                                >
+                                                    <i class="fa-regular fa-trash-can"></i>
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </li>
 
-                                </ul>
-                            </div>
-
-                        </td>
-                    </tr>
-
-                </tbody>
-
-                <tbody class="hover:bg-gray-100">
-                    <!-- Example Row -->
-                    <tr class="border-b">
-                        <td class="py-4 px-6 whitespace-nowrap">
-                            <div class="flex items-center gap-4">
-                                <img src="https://via.placeholder.com/50" alt="Book Cover" class="w-12 h-16 object-cover rounded">
-                                <div>
-                                    <p class="text-sm font-medium text-gray-900">The Great Gatsby</p>
-                                    <p class="text-xs text-gray-500">F. Scott Fitzgerald</p>
+                                    </ul>
                                 </div>
-                            </div>
-                        </td>
-                        <td class="py-4 px-6 whitespace-nowrap">History</td>
-                        <td class="py-4 px-6 whitespace-nowrap">
-                            <div>
-                                <p>S.Copy <span>KSH. 50</span></p>
-                                <p>H.Copy <span>KSH. 700</span> </p>
-                            </div>
-                        </td>
-                        <td class="py-4 px-6 whitespace-nowrap">Premium</td>
-                        <td class="py-4 px-6 whitespace-nowrap">100</td>
-                        <td class="relative inline-block py-4 px-6 whitespace-nowrap">
-                            <button
-                                type="button"
-                                class="actions-btn w-10 h-10 inline-flex items-center justify-center
-                                    rounded-lg border border-transparent
-                                    text-gray-500
-                                    hover:text-gray-800 hover:border-yellow-700 hover:bg-yellow-100
-                                    focus:outline-none focus:ring-2 focus:ring-yellow-600
-                                    transition"
-                            >
-                                <span class="text-xl leading-none">⋯</span>
-                            </button>
 
-                            <!-- Dropdown -->
-                            <div
-                                class="actions-menu hidden absolute right-0 mt-2 w-44
-                                    bg-white border border-gray-200
-                                    rounded-xl shadow-lg z-50"
-                            >
-                                <ul class="py-1 text-sm text-gray-700">
+                            </td>
+                        </tr>
 
-                                    <li>
-                                        <a href="#"
-                                        class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100">
-                                            <i class="fa-regular fa-eye"></i>
-                                            View
-                                        </a>
-                                    </li>
+                    </tbody>
+                @endforeach
 
-                                    <li>
-                                        <a href="#"
-                                        class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100">
-                                            <i class="fa-regular fa-pen-to-square"></i>
-                                            Edit
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#"
-                                        class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100">
-                                            <i class="fa-solid fa-download"></i>
-                                            Download
-                                        </a>
-                                    </li>
-
-                                    <li><hr class="my-1 border-gray-200"></li>
-
-                                    <li>
-                                        <form method="POST" action="#">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button
-                                                type="submit"
-                                                class="w-full flex items-center gap-3 px-4 py-2
-                                                    text-red-700 hover:bg-red-50"
-                                                onclick="return confirm('Delete this item?')"
-                                            >
-                                                <i class="fa-regular fa-trash-can"></i>
-                                                Delete
-                                            </button>
-                                        </form>
-                                    </li>
-
-                                </ul>
-                            </div>
-
-                        </td>
-                    </tr>
-
-                </tbody>
+                
             </table>
         </div>
     </div>
@@ -343,58 +164,130 @@
         <h2 class="text-xl font-semibold mb-4">Add New Book</h2>
 
         <!-- FORM -->
-        <form action="" method="POST" class="space-y-4">
+        <form action="{{ route('admin.books.store') }}" 
+            method="POST" 
+            enctype="multipart/form-data"
+            class="space-y-5">
             @csrf
 
             <div>
-                <label class="block text-sm font-medium text-gray-700">
-                    Title
-                </label>
+                <label class="block text-sm font-medium text-gray-700">Title</label>
                 <input type="text" name="title" required
                     class="w-full mt-1 px-3 py-2 border rounded-lg
-                           focus:outline-none focus:ring-2 focus:ring-pink-900">
+                        focus:outline-none focus:ring-2 focus:ring-pink-900">
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700">
-                    Author
-                </label>
+                <label class="block text-sm font-medium text-gray-700">Author</label>
                 <input type="text" name="author" required
                     class="w-full mt-1 px-3 py-2 border rounded-lg
-                           focus:outline-none focus:ring-2 focus:ring-pink-900">
+                        focus:outline-none focus:ring-2 focus:ring-pink-900">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Publication Date</label>
+                    <input type="date" name="publication_date"
+                        class="w-full mt-1 px-3 py-2 border rounded-lg
+                            focus:outline-none focus:ring-2 focus:ring-pink-900">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Language</label>
+                    <input type="text" name="language"
+                        class="w-full mt-1 px-3 py-2 border rounded-lg
+                            focus:outline-none focus:ring-2 focus:ring-pink-900"
+                        placeholder="English">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Pages</label>
+                    <input type="number" name="pages"
+                        class="w-full mt-1 px-3 py-2 border rounded-lg
+                            focus:outline-none focus:ring-2 focus:ring-pink-900">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Format</label>
+                    <select name="format"
+                        class="w-full mt-1 px-3 py-2 border rounded-lg
+                            focus:outline-none focus:ring-2 focus:ring-pink-900">
+                        <option value="Hardcover">Pdf</option>
+                        <option value="Ebook">Word</option>
+                    </select>
+                </div>
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700">
-                    Price
-                </label>
-                <input type="number" name="price" step="0.01" required
+                <label class="block text-sm font-medium text-gray-700">ISBN</label>
+                <input type="text" name="isbn"
                     class="w-full mt-1 px-3 py-2 border rounded-lg
-                           focus:outline-none focus:ring-2 focus:ring-pink-900">
+                        focus:outline-none focus:ring-2 focus:ring-pink-900">
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700">
-                    Description
-                </label>
-                <textarea name="description" rows="3"
+                <label class="block text-sm font-medium text-gray-700">Overview</label>
+                <textarea name="overview" rows="4"
                     class="w-full mt-1 px-3 py-2 border rounded-lg
-                           focus:outline-none focus:ring-2 focus:ring-pink-900"></textarea>
+                        focus:outline-none focus:ring-2 focus:ring-pink-900"></textarea>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Cover Image</label>
+                <input type="file" name="cover_image" accept="image/*"
+                    class="w-full mt-1 px-3 py-2 border rounded-lg
+                        focus:outline-none focus:ring-2 focus:ring-pink-900">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Category</label>
+                    <input type="text" name="category"
+                        class="w-full mt-1 px-3 py-2 border rounded-lg
+                            focus:outline-none focus:ring-2 focus:ring-pink-900">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Status</label>
+                    <select name="status"
+                        class="w-full mt-1 px-3 py-2 border rounded-lg
+                            focus:outline-none focus:ring-2 focus:ring-pink-900">
+                        <option value="Available">Premium</option>
+                        <option value="Out of Stock">Free</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Soft CopyPrice (KSH)</label>
+                    <input type="number" step="0.01" name="softCopyPrice"
+                        class="w-full mt-1 px-3 py-2 border rounded-lg
+                            focus:outline-none focus:ring-2 focus:ring-pink-900">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Haerd CopyPrice (KSH)</label>
+                    <input type="number" step="0.01" name="hardCopyPrice"
+                        class="w-full mt-1 px-3 py-2 border rounded-lg
+                            focus:outline-none focus:ring-2 focus:ring-pink-900">
+                </div>
             </div>
 
             <div class="flex justify-end gap-3 pt-4">
                 <button type="button"
-                        id="cancelAddBookModal"
-                        class="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-100">
+                    id="cancelAddBookModal"
+                    class="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-100">
                     Cancel
                 </button>
 
                 <button type="submit"
-                        class="px-5 py-2 bg-pink-900 text-white rounded-lg hover:bg-pink-950">
+                    class="px-5 py-2 bg-pink-900 text-white rounded-lg hover:bg-pink-950">
                     Save Book
                 </button>
             </div>
-
         </form>
     </div>
 </div>
