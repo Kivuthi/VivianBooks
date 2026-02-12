@@ -52,14 +52,19 @@
                         <tr class="border-b">
                             <td class="py-4 px-6 whitespace-nowrap">
                                 <div class="flex items-center gap-4">
-                                    <img src="{{ $book->image }}" alt="{{ $book->title }}" class="w-12 h-16 object-cover rounded">
+                                    @if($book->cover_image)
+                                        <img src="{{ asset('storage/' . $book->cover_image) }}" 
+                                            alt="{{ $book->title }}" 
+                                            class="w-12 h-16 object-cover rounded">
+                                    @endif
+                                    
                                     <div>
                                         <p class="text-sm font-medium text-gray-900">{{ $book->title }}</p>
                                         <p class="text-xs text-gray-500">{{ $book->author }}</p>
                                     </div>
                                 </div>
                             </td>
-                            <td class="py-4 px-6 whitespace-nowrap">{{ $book->category }}</td>
+                            <td class="py-4 whitespace-nowrap">{{ $book->category }}</td>
                             <td class="py-4 px-6 whitespace-nowrap">
                                 <div>
                                     <p>S.Copy <span>{{ $book->softCopyPrice }}</span></p>
@@ -67,7 +72,7 @@
                                 </div>
                             </td>
                             <td class="py-4 px-6 whitespace-nowrap">{{ $book->status }}</td>
-                            <td class="py-4 px-6 whitespace-nowrap">{{  count($book->downloads) }}</td>
+                            <td class="py-4 px-6 whitespace-nowrap">100</td>
                             <td class="relative inline-block py-4 px-6 whitespace-nowrap">
                                 <button
                                     type="button"
@@ -292,6 +297,151 @@
     </div>
 </div>
 
+{{-- edit --}}
+<div id="editBookModal"
+     class="fixed inset-0 z-50 hidden
+            bg-black bg-opacity-50
+            flex items-center justify-center">
+
+    <!-- Modal Box -->
+    <div class="bg-white w-full max-w-lg rounded-xl shadow-lg p-6 relative">
+
+        <!-- Close button -->
+        <button id="closeEditBookModal"
+                class="absolute top-3 right-3 text-gray-400 hover:text-gray-700">
+            ✕
+        </button>
+
+        <h2 class="text-xl font-semibold mb-4">Edit Book</h2>
+
+        <!-- FORM -->
+        <form action="{{ route('admin.books.store') }}" 
+            method="POST" 
+            enctype="multipart/form-data"
+            class="space-y-5">
+            @csrf
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Title</label>
+                <input type="text" name="title" required
+                    class="w-full mt-1 px-3 py-2 border rounded-lg
+                        focus:outline-none focus:ring-2 focus:ring-pink-900">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Author</label>
+                <input type="text" name="author" required
+                    class="w-full mt-1 px-3 py-2 border rounded-lg
+                        focus:outline-none focus:ring-2 focus:ring-pink-900">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Publication Date</label>
+                    <input type="date" name="publication_date"
+                        class="w-full mt-1 px-3 py-2 border rounded-lg
+                            focus:outline-none focus:ring-2 focus:ring-pink-900">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Language</label>
+                    <input type="text" name="language"
+                        class="w-full mt-1 px-3 py-2 border rounded-lg
+                            focus:outline-none focus:ring-2 focus:ring-pink-900"
+                        placeholder="English">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Pages</label>
+                    <input type="number" name="pages"
+                        class="w-full mt-1 px-3 py-2 border rounded-lg
+                            focus:outline-none focus:ring-2 focus:ring-pink-900">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Format</label>
+                    <select name="format"
+                        class="w-full mt-1 px-3 py-2 border rounded-lg
+                            focus:outline-none focus:ring-2 focus:ring-pink-900">
+                        <option value="Hardcover">Pdf</option>
+                        <option value="Ebook">Word</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700">ISBN</label>
+                <input type="text" name="isbn"
+                    class="w-full mt-1 px-3 py-2 border rounded-lg
+                        focus:outline-none focus:ring-2 focus:ring-pink-900">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Overview</label>
+                <textarea name="overview" rows="4"
+                    class="w-full mt-1 px-3 py-2 border rounded-lg
+                        focus:outline-none focus:ring-2 focus:ring-pink-900"></textarea>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Cover Image</label>
+                <input type="file" name="cover_image" accept="image/*"
+                    class="w-full mt-1 px-3 py-2 border rounded-lg
+                        focus:outline-none focus:ring-2 focus:ring-pink-900">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Category</label>
+                    <input type="text" name="category"
+                        class="w-full mt-1 px-3 py-2 border rounded-lg
+                            focus:outline-none focus:ring-2 focus:ring-pink-900">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Status</label>
+                    <select name="status"
+                        class="w-full mt-1 px-3 py-2 border rounded-lg
+                            focus:outline-none focus:ring-2 focus:ring-pink-900">
+                        <option value="Available">Premium</option>
+                        <option value="Out of Stock">Free</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Soft CopyPrice (KSH)</label>
+                    <input type="number" step="0.01" name="softCopyPrice"
+                        class="w-full mt-1 px-3 py-2 border rounded-lg
+                            focus:outline-none focus:ring-2 focus:ring-pink-900">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Haerd CopyPrice (KSH)</label>
+                    <input type="number" step="0.01" name="hardCopyPrice"
+                        class="w-full mt-1 px-3 py-2 border rounded-lg
+                            focus:outline-none focus:ring-2 focus:ring-pink-900">
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-3 pt-4">
+                <button type="button"
+                    id="cancelAddBookModal"
+                    class="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-100">
+                    Cancel
+                </button>
+
+                <button type="submit"
+                    class="px-5 py-2 bg-pink-900 text-white rounded-lg hover:bg-pink-950">
+                    Save Book
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 
     
 </x-adminDashboard>

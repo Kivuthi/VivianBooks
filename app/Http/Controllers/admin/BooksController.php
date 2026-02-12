@@ -36,12 +36,15 @@ class BooksController extends Controller
         ]);
 
         if ($request->hasFile('cover_image')) {
-            $path = $request->file('cover_image')->store('public/covers');
-            $validated['cover_image'] = basename($path);
+            $imagepath = $request->file('cover_image')->store('covers', 'public');
+            
+            $validated['cover_image'] =$imagepath;
         }
 
         Book::create($validated);
 
         return redirect()->route('admin.books.index')->with('success', 'Book added successfully!');
     }
+
+    
 }
