@@ -103,11 +103,11 @@
                                         </li>
 
                                         <li>
-                                            <a href="#"
+                                            <button type="button" id="openEditModal"
                                             class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100">
                                                 <i class="fa-regular fa-pen-to-square"></i>
                                                 Edit
-                                            </a>
+                                        </button>
                                         </li>
 
                                         <li>
@@ -121,7 +121,7 @@
                                         <li><hr class="my-1 border-gray-200"></li>
 
                                         <li>
-                                            <form method="POST" action="#">
+                                            <form method="POST" action="{{ route('admin.books.destroy', $book->id) }}">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button
@@ -315,24 +315,27 @@
         <h2 class="text-xl font-semibold mb-4">Edit Book</h2>
 
         <!-- FORM -->
-        <form action="{{ route('admin.books.store') }}" 
+        <form action="{{ route('admin.books.update', $book->id) }}" 
             method="POST" 
             enctype="multipart/form-data"
             class="space-y-5">
+            @method('PUT')
             @csrf
 
             <div>
                 <label class="block text-sm font-medium text-gray-700">Title</label>
                 <input type="text" name="title" required
                     class="w-full mt-1 px-3 py-2 border rounded-lg
-                        focus:outline-none focus:ring-2 focus:ring-pink-900">
+                        focus:outline-none focus:ring-2 focus:ring-pink-900"
+                        value="{{ $book->title ?? '' }}">
             </div>
 
             <div>
                 <label class="block text-sm font-medium text-gray-700">Author</label>
                 <input type="text" name="author" required
                     class="w-full mt-1 px-3 py-2 border rounded-lg
-                        focus:outline-none focus:ring-2 focus:ring-pink-900">
+                        focus:outline-none focus:ring-2 focus:ring-pink-900"
+                        value="{{ $book->author ?? '' }}">
             </div>
 
             <div class="grid grid-cols-2 gap-4">
@@ -340,7 +343,8 @@
                     <label class="block text-sm font-medium text-gray-700">Publication Date</label>
                     <input type="date" name="publication_date"
                         class="w-full mt-1 px-3 py-2 border rounded-lg
-                            focus:outline-none focus:ring-2 focus:ring-pink-900">
+                            focus:outline-none focus:ring-2 focus:ring-pink-900"
+                            value="{{ $book->publication_date ?? '' }}">
                 </div>
 
                 <div>
@@ -348,7 +352,8 @@
                     <input type="text" name="language"
                         class="w-full mt-1 px-3 py-2 border rounded-lg
                             focus:outline-none focus:ring-2 focus:ring-pink-900"
-                        placeholder="English">
+                            placeholder="English"
+                            value="{{ $book->language ?? '' }}">
                 </div>
             </div>
 
@@ -357,14 +362,16 @@
                     <label class="block text-sm font-medium text-gray-700">Pages</label>
                     <input type="number" name="pages"
                         class="w-full mt-1 px-3 py-2 border rounded-lg
-                            focus:outline-none focus:ring-2 focus:ring-pink-900">
+                            focus:outline-none focus:ring-2 focus:ring-pink-900"
+                            value="{{ $book->pages ?? '' }}">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Format</label>
                     <select name="format"
                         class="w-full mt-1 px-3 py-2 border rounded-lg
-                            focus:outline-none focus:ring-2 focus:ring-pink-900">
+                            focus:outline-none focus:ring-2 focus:ring-pink-900"
+                            value="{{ $book->format ?? '' }}">
                         <option value="Hardcover">Pdf</option>
                         <option value="Ebook">Word</option>
                     </select>
@@ -375,21 +382,23 @@
                 <label class="block text-sm font-medium text-gray-700">ISBN</label>
                 <input type="text" name="isbn"
                     class="w-full mt-1 px-3 py-2 border rounded-lg
-                        focus:outline-none focus:ring-2 focus:ring-pink-900">
+                        focus:outline-none focus:ring-2 focus:ring-pink-900"
+                        value="{{ $book->isbn ?? '' }}">
             </div>
 
             <div>
                 <label class="block text-sm font-medium text-gray-700">Overview</label>
                 <textarea name="overview" rows="4"
                     class="w-full mt-1 px-3 py-2 border rounded-lg
-                        focus:outline-none focus:ring-2 focus:ring-pink-900"></textarea>
+                        focus:outline-none focus:ring-2 focus:ring-pink-900">  </textarea>
             </div>
 
             <div>
                 <label class="block text-sm font-medium text-gray-700">Cover Image</label>
                 <input type="file" name="cover_image" accept="image/*"
                     class="w-full mt-1 px-3 py-2 border rounded-lg
-                        focus:outline-none focus:ring-2 focus:ring-pink-900">
+                        focus:outline-none focus:ring-2 focus:ring-pink-900"
+                        value="{{ $book->cover_image ?? '' }}">
             </div>
 
             <div class="grid grid-cols-2 gap-4">
@@ -397,14 +406,16 @@
                     <label class="block text-sm font-medium text-gray-700">Category</label>
                     <input type="text" name="category"
                         class="w-full mt-1 px-3 py-2 border rounded-lg
-                            focus:outline-none focus:ring-2 focus:ring-pink-900">
+                            focus:outline-none focus:ring-2 focus:ring-pink-900"
+                            value="{{ $book->category ?? '' }}">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Status</label>
                     <select name="status"
                         class="w-full mt-1 px-3 py-2 border rounded-lg
-                            focus:outline-none focus:ring-2 focus:ring-pink-900">
+                            focus:outline-none focus:ring-2 focus:ring-pink-900"
+                            value="{{ $book->status ?? '' }}">
                         <option value="Available">Premium</option>
                         <option value="Out of Stock">Free</option>
                     </select>
@@ -416,20 +427,22 @@
                     <label class="block text-sm font-medium text-gray-700">Soft CopyPrice (KSH)</label>
                     <input type="number" step="0.01" name="softCopyPrice"
                         class="w-full mt-1 px-3 py-2 border rounded-lg
-                            focus:outline-none focus:ring-2 focus:ring-pink-900">
+                            focus:outline-none focus:ring-2 focus:ring-pink-900"
+                            value="{{ $book->softCopyPrice ?? '' }}">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Haerd CopyPrice (KSH)</label>
                     <input type="number" step="0.01" name="hardCopyPrice"
                         class="w-full mt-1 px-3 py-2 border rounded-lg
-                            focus:outline-none focus:ring-2 focus:ring-pink-900">
+                            focus:outline-none focus:ring-2 focus:ring-pink-900"
+                            value="{{ $book->hardCopyPrice ?? '' }}">
                 </div>
             </div>
 
             <div class="flex justify-end gap-3 pt-4">
                 <button type="button"
-                    id="cancelAddBookModal"
+                    id="cancelEditBookModal"
                     class="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-100">
                     Cancel
                 </button>
@@ -495,4 +508,28 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.classList.add('hidden');
         }
     });
+
+    const openEditBtn = document.getElementById('openEditModal');
+    const editModal = document.getElementById('editBookModal');
+    const closeEditBtn = document.getElementById('closeEditBookModal');
+    const cancelEditBtn = document.getElementById('cancelEditBookModal');
+
+    openEditBtn.addEventListener('click', () => {
+        editModal.classList.remove('hidden');
+    });
+
+    closeEditBtn.addEventListener('click', () => {
+        editModal.classList.add('hidden');
+    });
+
+    cancelEditBtn.addEventListener('click', () => {
+        editModal.classList.add('hidden');
+    });
+
+    editModal.addEventListener('click', (e) => {
+        if (e.target === editModal) {
+            editModal.classList.add('hidden');
+        }
+    });
+
 </script>

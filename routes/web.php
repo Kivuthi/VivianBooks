@@ -24,6 +24,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/books', [BooksController::class, 'index'])->name('admin.books.index');
     Route::post('/admin/books', [BooksController::class, 'store'])->name('admin.books.store');
+    // Route::get('/admin/books/{id}/edit', [BooksController::class, 'edit'])->name('admin.books.edit');
+    Route::put('/admin/books/{id}', [BooksController::class, 'update'])->name('admin.books.update');
+    Route::delete('/admin/books/{id}', [BooksController::class, 'destroy'])->name('admin.books.destroy');
 });
 
 
