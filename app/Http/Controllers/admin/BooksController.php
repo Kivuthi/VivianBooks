@@ -32,6 +32,7 @@ class BooksController extends Controller
             'hardCopyPrice' => 'nullable|numeric',
             'rating' => 'nullable|numeric|min:0|max:5',
             'overview' => 'nullable|string',
+            'softCopyFile' => 'required|file|mimes:pdf,epub,mobi|max:10240',
 
         ]);
 
@@ -39,6 +40,12 @@ class BooksController extends Controller
             $imagepath = $request->file('cover_image')->store('covers', 'public');
             
             $validated['cover_image'] =$imagepath;
+        }
+
+        if ($request->hasFile('softCopyFile')) {
+            $filePath = $request->file('softCopyFile')->store('softcopies', 'public');
+
+            $validated['softCopyFile'] = $filePath;
         }
 
         Book::create($validated);
@@ -66,6 +73,7 @@ class BooksController extends Controller
             'hardCopyPrice' => 'nullable|numeric',
             'rating' => 'nullable|numeric|min:0|max:5',
             'overview' => 'nullable|string',
+            'softCopyFile' => 'required|file|mimes:pdf,epub,mobi|max:10240',
 
         ]);
 
@@ -75,9 +83,21 @@ class BooksController extends Controller
             $validated['cover_image'] =$imagepath;
         }
 
+        if ($request->hasFile('softCopyFile')) {
+            $filePath = $request->file('softCopyFile')->store('softcopies', 'public');
+
+            $validated['softCopyFile'] = $filePath;
+        }
+
         $book->update($validated);
 
         return redirect()->route('admin.books.index')->with('success', 'Book updated successfully!');
+    }
+
+    public function show($id)
+    {
+        $book = Book::findOrFail($id);
+        return view('admin.books.show', compact('book'));
     }
 
     public function destroy($id)

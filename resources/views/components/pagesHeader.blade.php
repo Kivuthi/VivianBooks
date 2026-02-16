@@ -9,13 +9,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <div class="hidden md:flex items-center justify-around py-4">
+    <div id="navbar"
+        class="hidden md:flex items-center justify-around 
+           fixed top-0 left-0 w-full
+           px-8 py-3 
+           bg-white backdrop-blur-md
+           shadow-md z-50 transition-all duration-300">
+
         <a href="{{ route('pages.index') }}" class="text-black text-2xl font-extrabold font-serif">
                 <i class="fa-solid fa-book-open mr-5 hover:transform-3d" style="color: #955050;"></i>
                 VivihBooks Store
         </a>
 
-        <div class="py-8 mt-4 flex items-center gap-8 text-amber-700 ">
+        <div class="py-8 flex items-center gap-8 text-amber-700 ">
             <a href="{{ route('pages.index') }}" 
                 class="hover:text-red-900"
                     {{ request()->routeIs('pages.index') ? 'text-red-900 font-semibold' : '' }}>
@@ -153,6 +159,17 @@
         menuToggle.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
-    </script>
+
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 50) {
+                navbar.classList.add('backdrop-blur-lg', 'bg-white/40', 'shadow-lg');
+            } else {
+                navbar.classList.remove('backdrop-blur-lg', 'bg-white/40', 'shadow-lg');
+            }
+        });
+</script>
+
 </body>
 </html>

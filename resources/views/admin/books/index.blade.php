@@ -95,7 +95,7 @@
                                     <ul class="py-1 text-sm text-gray-700">
 
                                         <li>
-                                            <a href="#"
+                                            <a href="{{ route('admin.books.show', $book->id) }}"
                                             class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100">
                                                 <i class="fa-regular fa-eye"></i>
                                                 View
@@ -109,6 +109,173 @@
                                                 Edit
                                         </button>
                                         </li>
+
+                                        {{-- edit --}}
+                                        <div id="editBookModal"
+                                            class="fixed inset-0 z-50 hidden
+                                                    bg-black bg-opacity-50
+                                                    flex items-center justify-center">
+
+                                            <!-- Modal Box -->
+                                            <div class="bg-white w-full max-w-lg rounded-xl shadow-lg p-6 relative">
+
+                                                <!-- Close button -->
+                                                <button id="closeEditBookModal"
+                                                        class="absolute top-3 right-3 text-gray-400 hover:text-gray-700">
+                                                    ✕
+                                                </button>
+
+                                                <h2 class="text-xl font-semibold mb-4">Edit Book</h2>
+
+                                                <!-- FORM -->
+                                                <form action="{{ route('admin.books.update', $book->id) }}" 
+                                                    method="POST" 
+                                                    enctype="multipart/form-data"
+                                                    class="space-y-5">
+                                                    @method('PUT')
+                                                    @csrf
+
+                                                    <div>
+                                                        <label class="block text-sm font-medium text-gray-700">Title</label>
+                                                        <input type="text" name="title" required
+                                                            class="w-full mt-1 px-3 py-2 border rounded-lg
+                                                                focus:outline-none focus:ring-2 focus:ring-pink-900"
+                                                                value="{{ $book->title ?? '' }}">
+                                                    </div>
+
+                                                    <div>
+                                                        <label class="block text-sm font-medium text-gray-700">Author</label>
+                                                        <input type="text" name="author" required
+                                                            class="w-full mt-1 px-3 py-2 border rounded-lg
+                                                                focus:outline-none focus:ring-2 focus:ring-pink-900"
+                                                                value="{{ $book->author ?? '' }}">
+                                                    </div>
+
+                                                    <div class="grid grid-cols-2 gap-4">
+                                                        <div>
+                                                            <label class="block text-sm font-medium text-gray-700">Publication Date</label>
+                                                            <input type="date" name="publication_date"
+                                                                class="w-full mt-1 px-3 py-2 border rounded-lg
+                                                                    focus:outline-none focus:ring-2 focus:ring-pink-900"
+                                                                    value="{{ $book->publication_date ?? '' }}">
+                                                        </div>
+
+                                                        <div>
+                                                            <label class="block text-sm font-medium text-gray-700">Language</label>
+                                                            <input type="text" name="language"
+                                                                class="w-full mt-1 px-3 py-2 border rounded-lg
+                                                                    focus:outline-none focus:ring-2 focus:ring-pink-900"
+                                                                    placeholder="English"
+                                                                    value="{{ $book->language ?? '' }}">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="grid grid-cols-2 gap-4">
+                                                        <div>
+                                                            <label class="block text-sm font-medium text-gray-700">Pages</label>
+                                                            <input type="number" name="pages"
+                                                                class="w-full mt-1 px-3 py-2 border rounded-lg
+                                                                    focus:outline-none focus:ring-2 focus:ring-pink-900"
+                                                                    value="{{ $book->pages ?? '' }}">
+                                                        </div>
+
+                                                        <div>
+                                                            <label class="block text-sm font-medium text-gray-700">Format</label>
+                                                            <select name="format"
+                                                                class="w-full mt-1 px-3 py-2 border rounded-lg
+                                                                    focus:outline-none focus:ring-2 focus:ring-pink-900"
+                                                                    value="{{ $book->format ?? '' }}">
+                                                                <option value="Hardcover">Pdf</option>
+                                                                <option value="Ebook">Word</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div>
+                                                        <label class="block text-sm font-medium text-gray-700">ISBN</label>
+                                                        <input type="text" name="isbn"
+                                                            class="w-full mt-1 px-3 py-2 border rounded-lg
+                                                                focus:outline-none focus:ring-2 focus:ring-pink-900"
+                                                                value="{{ $book->isbn ?? '' }}">
+                                                    </div>
+
+                                                    <div>
+                                                        <label class="block text-sm font-medium text-gray-700">Overview</label>
+                                                        <textarea name="overview" rows="4"
+                                                            class="w-full mt-1 px-3 py-2 border rounded-lg
+                                                                focus:outline-none focus:ring-2 focus:ring-pink-900">  </textarea>
+                                                    </div>
+
+                                                    <div>
+                                                        <label class="block text-sm font-medium text-gray-700">Cover Image</label>
+                                                        <input type="file" name="cover_image" accept="image/*"
+                                                            class="w-full mt-1 px-3 py-2 border rounded-lg
+                                                                focus:outline-none focus:ring-2 focus:ring-pink-900"
+                                                                value="{{ $book->cover_image ?? '' }}">
+                                                    </div>
+
+                                                    <div>
+                                                        <label class="block text-sm font-medium text-gray-700">Soft Copy File</label>
+                                                        <input type="file" name="softCopyFile" accept=".pdf,.doc,.docx"
+                                                            class="w-full mt-1 px-3 py-2 border rounded-lg
+                                                                focus:outline-none focus:ring-2 focus:ring-pink-900"
+                                                                value="{{ $book->softCopyFile ?? '' }}">
+                                                    </div>
+
+                                                    <div class="grid grid-cols-2 gap-4">
+                                                        <div>
+                                                            <label class="block text-sm font-medium text-gray-700">Category</label>
+                                                            <input type="text" name="category"
+                                                                class="w-full mt-1 px-3 py-2 border rounded-lg
+                                                                    focus:outline-none focus:ring-2 focus:ring-pink-900"
+                                                                    value="{{ $book->category ?? '' }}">
+                                                        </div>
+
+                                                        <div>
+                                                            <label class="block text-sm font-medium text-gray-700">Status</label>
+                                                            <select name="status"
+                                                                class="w-full mt-1 px-3 py-2 border rounded-lg
+                                                                    focus:outline-none focus:ring-2 focus:ring-pink-900"
+                                                                    value="{{ $book->status ?? '' }}">
+                                                                <option value="Available">Premium</option>
+                                                                <option value="Out of Stock">Free</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="grid grid-cols-2 gap-4">
+                                                        <div>
+                                                            <label class="block text-sm font-medium text-gray-700">Soft CopyPrice (KSH)</label>
+                                                            <input type="number" step="0.01" name="softCopyPrice"
+                                                                class="w-full mt-1 px-3 py-2 border rounded-lg
+                                                                    focus:outline-none focus:ring-2 focus:ring-pink-900"
+                                                                    value="{{ $book->softCopyPrice ?? '' }}">
+                                                        </div>
+
+                                                        <div>
+                                                            <label class="block text-sm font-medium text-gray-700">Hard CopyPrice (KSH)</label>
+                                                            <input type="number" step="0.01" name="hardCopyPrice"
+                                                                class="w-full mt-1 px-3 py-2 border rounded-lg
+                                                                    focus:outline-none focus:ring-2 focus:ring-pink-900"
+                                                                    value="{{ $book->hardCopyPrice ?? '' }}">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="flex justify-end gap-3 pt-4">
+                                                        <button type="button"
+                                                            id="cancelEditBookModal"
+                                                            class="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-100">
+                                                            Cancel
+                                                        </button>
+
+                                                        <button type="submit"
+                                                            class="px-5 py-2 bg-pink-900 text-white rounded-lg hover:bg-pink-950">
+                                                            Update Book
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
 
                                         <li>
                                             <a href="#"
@@ -246,6 +413,13 @@
                         focus:outline-none focus:ring-2 focus:ring-pink-900">
             </div>
 
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Soft Copy File</label>
+                <input type="file" name="softCopyFile" accept=".pdf,.doc,.docx"
+                    class="w-full mt-1 px-3 py-2 border rounded-lg
+                        focus:outline-none focus:ring-2 focus:ring-pink-900">
+            </div>
+
             <div class="grid grid-cols-2 gap-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Category</label>
@@ -284,165 +458,6 @@
             <div class="flex justify-end gap-3 pt-4">
                 <button type="button"
                     id="cancelAddBookModal"
-                    class="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-100">
-                    Cancel
-                </button>
-
-                <button type="submit"
-                    class="px-5 py-2 bg-pink-900 text-white rounded-lg hover:bg-pink-950">
-                    Save Book
-                </button>
-            </div>
-        </form>
-    </div>
-</div>
-
-{{-- edit --}}
-<div id="editBookModal"
-     class="fixed inset-0 z-50 hidden
-            bg-black bg-opacity-50
-            flex items-center justify-center">
-
-    <!-- Modal Box -->
-    <div class="bg-white w-full max-w-lg rounded-xl shadow-lg p-6 relative">
-
-        <!-- Close button -->
-        <button id="closeEditBookModal"
-                class="absolute top-3 right-3 text-gray-400 hover:text-gray-700">
-            ✕
-        </button>
-
-        <h2 class="text-xl font-semibold mb-4">Edit Book</h2>
-
-        <!-- FORM -->
-        <form action="{{ route('admin.books.update', $book->id) }}" 
-            method="POST" 
-            enctype="multipart/form-data"
-            class="space-y-5">
-            @method('PUT')
-            @csrf
-
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Title</label>
-                <input type="text" name="title" required
-                    class="w-full mt-1 px-3 py-2 border rounded-lg
-                        focus:outline-none focus:ring-2 focus:ring-pink-900"
-                        value="{{ $book->title ?? '' }}">
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Author</label>
-                <input type="text" name="author" required
-                    class="w-full mt-1 px-3 py-2 border rounded-lg
-                        focus:outline-none focus:ring-2 focus:ring-pink-900"
-                        value="{{ $book->author ?? '' }}">
-            </div>
-
-            <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Publication Date</label>
-                    <input type="date" name="publication_date"
-                        class="w-full mt-1 px-3 py-2 border rounded-lg
-                            focus:outline-none focus:ring-2 focus:ring-pink-900"
-                            value="{{ $book->publication_date ?? '' }}">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Language</label>
-                    <input type="text" name="language"
-                        class="w-full mt-1 px-3 py-2 border rounded-lg
-                            focus:outline-none focus:ring-2 focus:ring-pink-900"
-                            placeholder="English"
-                            value="{{ $book->language ?? '' }}">
-                </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Pages</label>
-                    <input type="number" name="pages"
-                        class="w-full mt-1 px-3 py-2 border rounded-lg
-                            focus:outline-none focus:ring-2 focus:ring-pink-900"
-                            value="{{ $book->pages ?? '' }}">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Format</label>
-                    <select name="format"
-                        class="w-full mt-1 px-3 py-2 border rounded-lg
-                            focus:outline-none focus:ring-2 focus:ring-pink-900"
-                            value="{{ $book->format ?? '' }}">
-                        <option value="Hardcover">Pdf</option>
-                        <option value="Ebook">Word</option>
-                    </select>
-                </div>
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium text-gray-700">ISBN</label>
-                <input type="text" name="isbn"
-                    class="w-full mt-1 px-3 py-2 border rounded-lg
-                        focus:outline-none focus:ring-2 focus:ring-pink-900"
-                        value="{{ $book->isbn ?? '' }}">
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Overview</label>
-                <textarea name="overview" rows="4"
-                    class="w-full mt-1 px-3 py-2 border rounded-lg
-                        focus:outline-none focus:ring-2 focus:ring-pink-900">  </textarea>
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Cover Image</label>
-                <input type="file" name="cover_image" accept="image/*"
-                    class="w-full mt-1 px-3 py-2 border rounded-lg
-                        focus:outline-none focus:ring-2 focus:ring-pink-900"
-                        value="{{ $book->cover_image ?? '' }}">
-            </div>
-
-            <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Category</label>
-                    <input type="text" name="category"
-                        class="w-full mt-1 px-3 py-2 border rounded-lg
-                            focus:outline-none focus:ring-2 focus:ring-pink-900"
-                            value="{{ $book->category ?? '' }}">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Status</label>
-                    <select name="status"
-                        class="w-full mt-1 px-3 py-2 border rounded-lg
-                            focus:outline-none focus:ring-2 focus:ring-pink-900"
-                            value="{{ $book->status ?? '' }}">
-                        <option value="Available">Premium</option>
-                        <option value="Out of Stock">Free</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Soft CopyPrice (KSH)</label>
-                    <input type="number" step="0.01" name="softCopyPrice"
-                        class="w-full mt-1 px-3 py-2 border rounded-lg
-                            focus:outline-none focus:ring-2 focus:ring-pink-900"
-                            value="{{ $book->softCopyPrice ?? '' }}">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Haerd CopyPrice (KSH)</label>
-                    <input type="number" step="0.01" name="hardCopyPrice"
-                        class="w-full mt-1 px-3 py-2 border rounded-lg
-                            focus:outline-none focus:ring-2 focus:ring-pink-900"
-                            value="{{ $book->hardCopyPrice ?? '' }}">
-                </div>
-            </div>
-
-            <div class="flex justify-end gap-3 pt-4">
-                <button type="button"
-                    id="cancelEditBookModal"
                     class="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-100">
                     Cancel
                 </button>

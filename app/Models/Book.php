@@ -21,6 +21,7 @@ class Book extends Model
         'status',
         'softCopyPrice',
         'hardCopyPrice',
-        'rating'
+        'rating',
+        'softCopyFile',
     ];
 }
