@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\BooksController;
 use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\FeaturedBooksController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\pages\HomepageController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/books/{id}', [BooksController::class, 'show'])->name('admin.books.show');
     Route::put('/admin/books/{id}', [BooksController::class, 'update'])->name('admin.books.update');
     Route::delete('/admin/books/{id}', [BooksController::class, 'destroy'])->name('admin.books.destroy');
+
+    Route::get('/admin/featuredBooks', [FeaturedBooksController::class, 'index'])->name('admin.featuredBooks.index');
+    Route::post('/admin/featuredBooks', [FeaturedBooksController::class, 'store'])->name('admin.featuredBooks.store');
+    Route::get('/admin/featuredBooks/{id}', [FeaturedBooksController::class, 'show'])->name('admin.featuredBooks.show');
+    Route::put('/admin/featuredBooks/{id}', [FeaturedBooksController::class, 'update'])->name('admin.featuredBooks.update');
+    Route::delete('/admin/featuredBooks/{id}', [FeaturedBooksController::class, 'destroy'])->name('admin.featuredBooks.destroy');
 });
 
 

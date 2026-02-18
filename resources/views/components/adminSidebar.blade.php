@@ -27,6 +27,18 @@
                 Books
             </a>
 
+            <a href="{{ route('admin.featuredBooks.index') }}" 
+                class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:text-red-900 hover:bg-red-50">
+                <i class="fa-solid fa-book"></i>
+                Featured Books
+            </a>
+
+            <a href="#" 
+                class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:text-red-900 hover:bg-red-50">
+                <i class="fa-solid fa-book"></i>
+                Trending Books
+            </a>
+
             <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:text-red-900 hover:bg-red-50">
                 <i class="fa-solid fa-users"></i>
                 Users

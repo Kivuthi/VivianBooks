@@ -96,7 +96,7 @@
                 <div class="min-w-[250px] bg-white rounded-xl shadow-lg overflow-hidden group reveal">
 
                     <div class="relative">
-                        <img src="{{ asset('images/book1.jpg') }}"
+                        <img src="{{ asset('images/Atomic.jpeg') }}"
                              class="w-full h-72 object-cover group-hover:scale-110 transition duration-500">
 
                         <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-4">
@@ -152,7 +152,7 @@
                 <div class="min-w-[250px] bg-white rounded-xl shadow-lg overflow-hidden group reveal">
 
                     <div class="relative">
-                        <img src="{{ asset('images/book1.jpg') }}"
+                        <img src="{{ asset('images/Atomic.jpeg') }}"
                                 class="w-full h-72 object-cover group-hover:scale-110 transition duration-500">
 
                         <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-4">
