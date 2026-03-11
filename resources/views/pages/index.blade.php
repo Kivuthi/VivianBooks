@@ -36,7 +36,7 @@
             </p>
 
             <div class="flex flex-col md:flex-row gap-4">
-                <a href="#" class="bg-red-700 hover:bg-red-800 px-6 py-3 rounded-lg text-white transition">
+                <a href="{{ route('pages.books.browse') }}" class="bg-red-700 hover:bg-red-800 px-6 py-3 rounded-lg text-white transition">
                     Browse Library →
                 </a>
 

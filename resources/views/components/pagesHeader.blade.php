@@ -28,10 +28,15 @@
                     Home
             </a>
             
-            <a href="" 
+            <a href="{{ route('pages.books.browse') }}" 
                 class="hover:text-red-900"
-                    {{ request()->routeIs('pages.index') ? 'text-red-900 font-semibold' : '' }}>
+                    {{ request()->routeIs('pages.books.browse') ? 'text-red-900 font-semibold' : '' }}>
                     Browse Books
+            </a>
+            
+            <a href="" 
+                class="hover:text-red-900">
+                    Categories
             </a>
         </div>
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\FeaturedBooksController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\pages\HomepageController;
+use App\Http\Controllers\pages\BooksController as PagesBooksController;
 use Illuminate\Support\Facades\Route;
 
 //guest routes
@@ -38,4 +39,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 
 Route::get('/', [HomepageController::class, 'index'])->name('pages.index');
+Route::get('/browse-books', [PagesBooksController::class, 'browse'])->name('pages.books.browse');
+Route::get('/books/{id}', [PagesBooksController::class, 'show'])->name('pages.books.show');
 

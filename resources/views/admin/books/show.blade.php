@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="container mx-auto px-4 py-8">
+    <div class="container mx-auto px-4 py-8 md:mt-25">
         <h1 class="text-3xl font-bold mb-6">Book Details</h1>
 
         <div>
