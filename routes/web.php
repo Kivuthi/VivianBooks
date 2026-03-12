@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\BooksController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\FeaturedBooksController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\checkout\PaymentController;
 use App\Http\Controllers\pages\HomepageController;
 use App\Http\Controllers\pages\BooksController as PagesBooksController;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,8 @@ Route::middleware('guest')->group(function () {
 //auth routes
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/checkout/pay', [PaymentController::class, 'pay'])->name('checkout.pay');
+    Route::get('/checkout/{book}', [PaymentController::class, 'index'])->name('pages.checkout.index');
 });
 
 //admin routes

@@ -138,10 +138,12 @@
 
                         <!-- Buttons -->
                         <div class="flex flex-col sm:flex-row gap-4 mb-8">
-                            <button class="flex-1 bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded-lg font-semibold transition flex items-center justify-center gap-2">
-                                <i class="fas fa-download"></i>
+                            <a href="{{ $book->softCopyPrice ? route('pages.checkout.index', $book->id) : '#' }}"
+                                class="flex-1 bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded-lg font-semibold transition flex items-center justify-start gap-2">
+                                <i class="fas fa-download"></i> 
                                 Buy Digital Copy
-                            </button>
+                            </a>
+
                             <button class="flex-1 border-2 border-gray-300 hover:border-gray-400 text-gray-700 px-6 py-3 rounded-lg font-semibold transition flex items-center justify-center gap-2">
                                 <i class="fas fa-shopping-bag"></i>
                                 Order Physical Copy
