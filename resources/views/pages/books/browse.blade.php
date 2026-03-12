@@ -53,7 +53,7 @@
 
             <!-- Search and Filter Section -->
             <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-                <div class="flex flex-row justify-between gap-4">
+                <div class="flex flex-col md:flex flex-row justify-between gap-4">
                     <!-- Search Bar -->
                     <form method="GET" action="{{ route('pages.books.browse') }}" class="flex gap-2">
                         <input type="text" 
@@ -61,7 +61,8 @@
                             placeholder="Search books or authors..."
                             value="{{ request('search') }}"
                             class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700">
-                        <button type="submit" class="px-6 py-3 bg-red-700 text-white rounded-lg hover:bg-red-800 transition font-medium">
+                        <button type="submit" 
+                            class="px-4 py-1 md:px-6 py-3 bg-red-700 text-white rounded-lg hover:bg-red-800 transition font-medium">
                             Search
                         </button>
                     </form>
@@ -114,49 +115,49 @@
                                 class="flex items-center gap-2 p-2 rounded hover:bg-red-50 transition {{ !request('category') ? 'bg-red-50 text-red-700' : 'text-gray-700' }}">
                                 <i class="fas fa-book text-red-700"></i>
                                 <span>Fiction</span>
-                                <span class="ml-auto text-sm text-gray-500">234</span>
+                                <span class="ml-auto text-sm text-gray-500">{{ count($books->where('category', 'Fiction')) }}</span>
                             </a>
                             <a href="{{ route('pages.books.browse', ['category' => 'Non-Fiction']) }}"
                                 class="flex items-center gap-2 p-2 rounded hover:bg-red-50 transition text-gray-700">
                                 <i class="fas fa-book text-gray-400"></i>
                                 <span>Non-Fiction</span>
-                                <span class="ml-auto text-sm text-gray-500">189</span>
+                                <span class="ml-auto text-sm text-gray-500">{{ count($books->where('category', 'Non-Fiction')) }}</span>
                             </a>
                             <a href="{{ route('pages.books.browse', ['category' => 'Self-Help']) }}"
                                 class="flex items-center gap-2 p-2 rounded hover:bg-red-50 transition text-gray-700">
                                 <i class="fas fa-lightbulb text-yellow-500"></i>
                                 <span>Self-Help</span>
-                                <span class="ml-auto text-sm text-gray-500">156</span>
+                                <span class="ml-auto text-sm text-gray-500">{{ count($books->where('category', 'Self-Help')) }}</span>
                             </a>
                             <a href="{{ route('pages.books.browse', ['category' => 'Science']) }}"
                                 class="flex items-center gap-2 p-2 rounded hover:bg-red-50 transition text-gray-700">
                                 <i class="fas fa-flask text-blue-500"></i>
                                 <span>Science</span>
-                                <span class="ml-auto text-sm text-gray-500">98</span>
+                                <span class="ml-auto text-sm text-gray-500">{{ count($books->where('category', 'Science')) }}</span>
                             </a>
                             <a href="{{ route('pages.books.browse', ['category' => 'History']) }}"
                                 class="flex items-center gap-2 p-2 rounded hover:bg-red-50 transition text-gray-700">
                                 <i class="fas fa-landmark text-purple-500"></i>
                                 <span>History</span>
-                                <span class="ml-auto text-sm text-gray-500">142</span>
+                                <span class="ml-auto text-sm text-gray-500">{{ count($books->where('category', 'History')) }}</span>
                             </a>
                             <a href="{{ route('pages.books.browse', ['category' => 'Biography']) }}"
                                 class="flex items-center gap-2 p-2 rounded hover:bg-red-50 transition text-gray-700">
                                 <i class="fas fa-user text-blue-700"></i>
                                 <span>Biography</span>
-                                <span class="ml-auto text-sm text-gray-500">87</span>
+                                <span class="ml-auto text-sm text-gray-500">{{ count($books->where('category', 'Biography')) }}</span>
                             </a>
                             <a href="{{ route('pages.books.browse', ['category' => 'Philosophy']) }}"
                                 class="flex items-center gap-2 p-2 rounded hover:bg-red-50 transition text-gray-700">
                                 <i class="fas fa-brain text-pink-500"></i>
                                 <span>Philosophy</span>
-                                <span class="ml-auto text-sm text-gray-500">65</span>
+                                <span class="ml-auto text-sm text-gray-500">{{ count($books->where('category', 'Philosophy')) }}</span>
                             </a>
                             <a href="{{ route('pages.books.browse', ['category' => 'Business']) }}"
                                 class="flex items-center gap-2 p-2 rounded hover:bg-red-50 transition text-gray-700">
                                 <i class="fas fa-briefcase text-amber-700"></i>
                                 <span>Business</span>
-                                <span class="ml-auto text-sm text-gray-500">123</span>
+                                <span class="ml-auto text-sm text-gray-500">{{ count($books->where('category', 'Business')) }}</span>
                             </a>
                         </div>
                     </div>
