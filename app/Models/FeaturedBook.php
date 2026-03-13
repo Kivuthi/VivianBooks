@@ -22,5 +22,11 @@ class FeaturedBook extends Model
         'hardCopyPrice',
         'rating',
         'softCopyFile',
+        'description',
     ];  
+
+    public function book()
+    {
+        return $this->belongsTo(Book::class);
+    }
 }

@@ -19,8 +19,9 @@ return new class extends Migration
             $table->string('language')->nullable();
             $table->integer('pages')->nullable();
             $table->string('format')->nullable();
-            $table->string('isbn')->unique()->nullable();
+            $table->string('isbn')->nullable();
             $table->text('overview')->nullable();
+            $table->text('description')->nullable();
             $table->string('cover_image')->nullable();
             $table->string('category')->nullable();
             $table->string('status')->default('premium');

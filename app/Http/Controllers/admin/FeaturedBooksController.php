@@ -16,6 +16,7 @@ class FeaturedBooksController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'author' => 'required|string|max:255',
@@ -49,6 +50,7 @@ class FeaturedBooksController extends Controller
         }
 
         FeaturedBook::create($validated);
+
 
         return redirect()->route('admin.featuredBooks.index')->with('success', 'Featured book added successfully!');
     }

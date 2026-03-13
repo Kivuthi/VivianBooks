@@ -92,26 +92,35 @@
 
             <div id="slider" class="flex gap-6 transition-transform duration-500">
 
-                @for ($i = 0; $i < 4; $i++)
+                @foreach ($featuredBooks as $featuredBook)
                 <div class="min-w-[250px] bg-white rounded-xl shadow-lg overflow-hidden group reveal">
 
                     <div class="relative">
-                        <img src="{{ asset('images/Atomic.jpeg') }}"
-                             class="w-full h-72 object-cover group-hover:scale-110 transition duration-500">
+                       @if($featuredBook->cover_image)
+                            <img src="{{ asset('storage/' . $featuredBook->cover_image) }}" 
+                                alt="{{ $featuredBook->title }}"
+                                class="book-image w-full h-full object-cover">
+                        @else
+                            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-300 to-gray-400">
+                                <i class="fas fa-book text-gray-500 text-4xl"></i>
+                            </div>
+                        @endif
 
                         <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-4">
-                            <button class="bg-white px-4 py-2 rounded-lg">View</button>
+                            <a href="{{ route('pages.books.show', $featuredBook->id) }}" class="bg-white px-4 py-2 rounded-lg">
+                                View
+                            </a>
                             <button class="bg-red-700 text-white px-4 py-2 rounded-lg">Cart</button>
                         </div>
                     </div>
 
                     <div class="p-4">
-                        <h3 class="font-serif font-bold">The Midnight Library</h3>
-                        <p class="text-gray-600 text-sm">Matt Haig</p>
+                        <h3 class="font-serif font-bold">{{ $featuredBook->title }}</h3>
+                        <p class="text-gray-600 text-sm">{{ $featuredBook->author }}</p>
                     </div>
 
                 </div>
-                @endfor
+                @endforeach
 
             </div>
 

@@ -1,4 +1,14 @@
 <x-adminDashboard>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    
     <div class="flex flex-row items-center justify-between mb-6">
         <div>
             <h1 class="text-3xl font-bold font-serif mb-4">Featured Books Management</h1>
@@ -10,7 +20,7 @@
                 id="openAddBookModal"
                 class="text-white bg-pink-900 hover:bg-pink-900 focus:ring-4 focus:ring-pink-900 
                         font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
-                        + Add Book 
+                        + Add Featured Books
             </button>
         </div>
     </div>
