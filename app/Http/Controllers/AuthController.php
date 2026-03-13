@@ -50,6 +50,13 @@ class AuthController extends Controller
             return redirect()->route('pages.index');
         }
 
+        if (session()->has('expired')){
+            session()->forget('expired');
+            return redirect()->route('auth.login')->withErrors([
+                'email' => 'Your session has expired. Please log in again.',
+            ]);
+        }
+
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);

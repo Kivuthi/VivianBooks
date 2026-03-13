@@ -21,6 +21,11 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('/checkout/pay', [PaymentController::class, 'pay'])->name('checkout.pay');
+    Route::post('/mpesa/callback', [PaymentController::class, 'callback'])->name('mpesa.callback');
+    Route::get('/checkout/{book}', [PaymentController::class, 'index'])->name('checkout');
+    Route::post('/checkout/pay', [PaymentController::class, 'pay'])->name('checkout.pay');
+    Route::get('/payment/success', fn() => view('payment.success'))->name('payment.success');
+    Route::get('/payment/cancel', fn() => view('payment.cancel'))->name('payment.cancel');
     Route::get('/checkout/{book}', [PaymentController::class, 'index'])->name('pages.checkout.index');
 });
 

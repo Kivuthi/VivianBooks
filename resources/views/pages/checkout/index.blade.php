@@ -55,7 +55,7 @@
 
                     </div>
 
-                    <div class="space-y-4">
+                    <div class="space-y-4 hidden" id="card-details">
 
                         <div>
                             <label class="block text-sm font-medium">
@@ -114,7 +114,7 @@
 
                     <!-- Pay Button -->
                     <button type="submit"
-                        class="w-full bg-redtext-red-800 hover:bg-redtext-red-800 text-red-800 font-semibold py-3 rounded-lg transition">
+                        class="w-full bg-red-800 hover:bg-red-600 text-white font-semibold py-3 rounded-lg transition">
 
                         Pay ${{ number_format($book->softCopyPrice, 2) }}
 
@@ -195,4 +195,19 @@
         </div>
 
     </div>
+
+    <script>
+        const paymentMethodRadios = document.querySelectorAll('input[name="payment_method"]');
+        const cardDetails = document.getElementById('card-details');
+
+        paymentMethodRadios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (radio.value === 'card') {
+                    cardDetails.classList.remove('hidden');
+                } else {
+                    cardDetails.classList.add('hidden');
+                }
+            });
+        });
+    </script>
 </x-layout>
