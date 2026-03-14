@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\BooksController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\FeaturedBooksController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Checkout\CheckoutController;
 use App\Http\Controllers\checkout\PaymentController;
 use App\Http\Controllers\pages\HomepageController;
 use App\Http\Controllers\pages\BooksController as PagesBooksController;
@@ -20,13 +21,8 @@ Route::middleware('guest')->group(function () {
 //auth routes
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/checkout/{type}/{id}', [CheckoutController::class, 'index'])->name('checkout');
     Route::post('/checkout/pay', [PaymentController::class, 'pay'])->name('checkout.pay');
-    Route::post('/mpesa/callback', [PaymentController::class, 'callback'])->name('mpesa.callback');
-    Route::get('/checkout/{book}', [PaymentController::class, 'index'])->name('checkout');
-    Route::post('/checkout/pay', [PaymentController::class, 'pay'])->name('checkout.pay');
-    Route::get('/payment/success', fn() => view('payment.success'))->name('payment.success');
-    Route::get('/payment/cancel', fn() => view('payment.cancel'))->name('payment.cancel');
-    Route::get('/checkout/{book}', [PaymentController::class, 'index'])->name('pages.checkout.index');
 });
 
 //admin routes
@@ -49,4 +45,5 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::get('/', [HomepageController::class, 'index'])->name('pages.index');
 Route::get('/browse-books', [PagesBooksController::class, 'browse'])->name('pages.books.browse');
 Route::get('/books/{id}', [PagesBooksController::class, 'show'])->name('pages.books.show');
+Route::get('/featuredBooks/{id}', [HomepageController::class, 'show'])->name('pages.display.featuredBooks');
 

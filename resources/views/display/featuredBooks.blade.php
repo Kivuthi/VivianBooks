@@ -1,4 +1,4 @@
-<x-layout title="{{ $book->title }}">
+<x-layout title="{{ $featuredBook->title }}">
     <style>
         .premium-lock {
             display: flex;
@@ -55,9 +55,9 @@
                     <div class="flex items-start justify-center">
                         <div class="w-full max-w-sm">
                             <div class="relative rounded-lg overflow-hidden shadow-xl h-96 bg-gray-100 flex items-center justify-center">
-                                @if($book->cover_image)
-                                    <img src="{{ asset('storage/' . $book->cover_image) }}" 
-                                        alt="{{ $book->title }}"
+                                @if($featuredBook->cover_image)
+                                    <img src="{{ asset('storage/' . $featuredBook->cover_image) }}" 
+                                        alt="{{ $featuredBook->title }}"
                                         class="w-full h-full object-cover">
                                 @else
                                     <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-300 to-gray-400">
@@ -66,7 +66,7 @@
                                 @endif
 
                                 <!-- Premium Lock Overlay -->
-                                @if($book->softCopyPrice)
+                                @if($featuredBook->softCopyPrice)
                                     <div class="absolute inset-0 premium-lock">
                                         <div class="text-center">
                                             <div class="lock-icon">
@@ -86,24 +86,24 @@
                         <div>
                             <div class="flex items-start gap-3 mb-4">
                                 <span class="inline-block bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-semibold">
-                                    {{ ucfirst($book->category ?? 'Uncategorized') }}
+                                    {{ ucfirst($featuredBook->category ?? 'Uncategorized') }}
                                 </span>
                             </div>
 
                             <h1 class="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-2">
-                                {{ $book->title }}
+                                {{ $featuredBook->title }}
                             </h1>
                             <p class="text-xl text-gray-600 mb-6">
-                                by {{ $book->author }}
+                                by {{ $featuredBook->author }}
                             </p>
 
-                            @if($book->rating)
+                            @if($featuredBook->rating)
                                 <div class="flex items-center gap-3 mb-6 pb-6 border-b border-gray-200">
                                     <div class="flex text-yellow-400">
                                         @for($i = 0; $i < 5; $i++)
-                                            @if($i < floor($book->rating))
+                                            @if($i < floor($featuredBook->rating))
                                                 <i class="fas fa-star text-lg"></i>
-                                            @elseif($i < ceil($book->rating))
+                                            @elseif($i < ceil($featuredBook->rating))
                                                 <i class="fas fa-star-half-alt text-lg"></i>
                                             @else
                                                 <i class="far fa-star text-lg"></i>
@@ -111,14 +111,14 @@
                                         @endfor
                                     </div>
                                     <span class="text-gray-700 font-semibold">
-                                        {{ number_format($book->rating, 1) }} (2.4k reviews)
+                                        {{ number_format($featuredBook->rating, 1) }} (2.4k reviews)
                                     </span>
                                 </div>
                             @endif
 
-                            @if($book->softCopyPrice)
+                            @if($featuredBook->softCopyPrice)
                                 <div class="text-red-700 text-4xl font-bold mb-2">
-                                    KSH {{ number_format($book->softCopyPrice, 2) }}
+                                    KSH {{ number_format($featuredBook->softCopyPrice, 2) }}
                                 </div>
                                 <div class="inline-block bg-red-50 text-red-700 px-3 py-1 rounded text-sm font-semibold mb-6">
                                     <i class="fas fa-crown mr-1"></i> Premium
@@ -132,13 +132,13 @@
 
                         <div class="mb-8 pb-8 border-b border-gray-200">
                             <p class="text-gray-700 leading-relaxed">
-                                {{ $book->overview ?? 'No description available for this book.' }}
+                                {{ $featuredBook->overview ?? 'No description available for this book.' }}
                             </p>
                         </div>
 
                         <!-- Buttons -->
                         <div class="flex flex-col sm:flex-row gap-4 mb-8">
-                            <a href="#"
+                            <a href="{{ $featuredBook->softCopyPrice ? route('checkout', ['type' => 'featured', 'id' => $featuredBook->id]) : '#' }}"
                                 class="flex-1 bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded-lg font-semibold transition flex items-center justify-start gap-2">
                                 <i class="fas fa-download"></i> 
                                 Buy Digital Copy
@@ -157,32 +157,32 @@
                         </div>
 
                         <div class="bg-gray-50 rounded-lg p-6 grid grid-cols-2 md:grid-cols-4 gap-6">
-                            @if($book->pages)
+                            @if($featuredBook->pages)
                                 <div>
                                     <p class="text-gray-600 text-sm mb-1">Pages</p>
-                                    <p class="text-gray-900 font-semibold text-lg">{{ $book->pages }}</p>
+                                    <p class="text-gray-900 font-semibold text-lg">{{ $featuredBook->pages }}</p>
                                 </div>
                             @endif
                             
-                            @if($book->language)
+                            @if($featuredBook->language)
                                 <div>
                                     <p class="text-gray-600 text-sm mb-1">Language</p>
-                                    <p class="text-gray-900 font-semibold text-lg">{{ ucfirst($book->language) }}</p>
+                                    <p class="text-gray-900 font-semibold text-lg">{{ ucfirst($featuredBook->language) }}</p>
                                 </div>
                             @endif
                             
-                            @if($book->format)
+                            @if($featuredBook->format)
                                 <div>
                                     <p class="text-gray-600 text-sm mb-1">Format</p>
-                                    <p class="text-gray-900 font-semibold text-lg uppercase">{{ $book->format }}</p>
+                                    <p class="text-gray-900 font-semibold text-lg uppercase">{{ $featuredBook->format }}</p>
                                 </div>
                             @endif
                             
-                            @if($book->publication_date)
+                            @if($featuredBook->publication_date)
                                 <div>
                                     <p class="text-gray-600 text-sm mb-1">Published</p>
                                     <p class="text-gray-900 font-semibold text-lg">
-                                        {{ \Carbon\Carbon::parse($book->publication_date)->format('Y') }}
+                                        {{ \Carbon\Carbon::parse($featuredBook->publication_date)->format('Y') }}
                                     </p>
                                 </div>
                             @endif
@@ -209,7 +209,7 @@
                             {{ $book->overview ?? 'No detailed description available for this book.' }}
                         </p>
                         <p class="text-gray-600">
-                            ISBN: {{ $book->isbn ?? 'N/A' }}
+                            ISBN: {{ $featuredBook->isbn ?? 'N/A' }}
                         </p>
                     </div>
 
@@ -226,7 +226,7 @@
                         <h3 class="text-2xl font-bold text-gray-900 mb-6 font-serif">Reviews</h3>
                         <p class="text-gray-700 mb-6">
                             This book has a rating of 
-                            <span class="font-bold text-red-700">{{ $book->rating ?? 'N/A' }}/5</span>
+                            <span class="font-bold text-red-700">{{ $featuredBook->rating ?? 'N/A' }}/5</span>
                             from readers.
                         </p>
                         <div class="space-y-6">

@@ -23,4 +23,9 @@ class Order extends Model
     {
         return $this->belongsTo(Book::class);
     }
+
+    public function featuredBook()
+    {
+        return $this->belongsTo(FeaturedBook::class);
+    }
 }

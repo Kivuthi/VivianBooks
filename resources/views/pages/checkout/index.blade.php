@@ -116,7 +116,7 @@
                     <button type="submit"
                         class="w-full bg-red-800 hover:bg-red-600 text-white font-semibold py-3 rounded-lg transition">
 
-                        Pay ${{ number_format($book->softCopyPrice, 2) }}
+                        Pay ${{ number_format($item->softCopyPrice, 2) }}
 
                     </button>
 
@@ -136,21 +136,21 @@
                     <div class="flex gap-4 mb-6">
 
                         <img
-                            src="{{ $book->cover_image ? asset('storage/' . $book->cover_image) : asset('images/default-book-cover.jpg') }}"
-                            alt="{{ $book->title }}"
+                            src="{{ $item->cover_image ? asset('storage/' . $item->cover_image) : asset('images/default-book-cover.jpg') }}"
+                            alt="{{ $item->title }}"
                             class="w-16 h-24 object-cover rounded">
 
                         <div>
                             <h3 class="font-semibold">
-                                {{ $book->title }}
+                                {{ $item->title }}
                             </h3>
 
                             <p class="text-sm text-gray-500">
-                                {{ $book->author }}
+                                {{ $item->author }}
                             </p>
 
                             <p class="text-sm text-gray-500 mt-1">
-                                Digital Copy ({{ $book->format }})
+                                Digital Copy ({{ $item->format }})
                             </p>
                         </div>
 
@@ -161,7 +161,7 @@
 
                         <div class="flex justify-between text-sm">
                             <span class="text-gray-500">Subtotal</span>
-                            <span>${{ number_format($book->softCopyPrice, 2) }}</span>
+                            <span>${{ number_format($item->softCopyPrice, 2) }}</span>
                         </div>
 
                         <div class="flex justify-between text-sm">
@@ -172,7 +172,7 @@
                         <div class="flex justify-between border-t pt-3 font-semibold text-lg">
                             <span>Total</span>
                             <span class="text-red-800">
-                                ${{ number_format($book->softCopyPrice, 2) }}
+                                ${{ number_format($item->softCopyPrice, 2) }}
                             </span>
                         </div>
 

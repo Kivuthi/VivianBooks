@@ -107,7 +107,7 @@
                         @endif
 
                         <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-4">
-                            <a href="{{ route('pages.books.show', $featuredBook->id) }}" class="bg-white px-4 py-2 rounded-lg">
+                            <a href="{{ route('pages.display.featuredBooks', $featuredBook->id) }}" class="bg-white px-4 py-2 rounded-lg">
                                 View
                             </a>
                             <button class="bg-red-700 text-white px-4 py-2 rounded-lg">Cart</button>

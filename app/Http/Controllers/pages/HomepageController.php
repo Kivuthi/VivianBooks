@@ -18,6 +18,6 @@ class HomepageController extends Controller
     public function show($id)
     {
         $featuredBook = \App\Models\FeaturedBook::findOrFail($id);
-        return view('pages.books.show', compact('featuredBook'));
+        return view('display.featuredBooks', compact('featuredBook'));
     }
 }
